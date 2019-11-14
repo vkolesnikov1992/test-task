@@ -59,7 +59,7 @@ public class Charapter : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
 
         rigidbody.AddForce(new Vector2(moveHorizontal * forse, rigidbody.velocity.y));
-        Debug.Log(moveHorizontal * forse + "  " + rigidbody.velocity);
+        
         
 
         isGrounded = Physics2D.OverlapCircle(feetPosition.position, checkRadius, whatIsGround);
@@ -84,8 +84,11 @@ public class Charapter : MonoBehaviour
     {
         if (collision.collider.tag == "enemyCube")
         {
-            
-             lives--;
+            if(lives != 0)
+            {
+                lives--;
+            }
+             
             
 
             if (lives == 0)

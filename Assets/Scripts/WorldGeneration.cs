@@ -14,10 +14,10 @@ public class WorldGeneration : MonoBehaviour
     private int width;
     [SerializeField] 
     private int height;
-    public int[,] cubesArray;
+    private int[,] cubesArray;
     public GameObject[,] gameObjects;
+    private List<Vector3> fullPath = new List<Vector3>();
 
-    
 
 
     PathFinding pathF;
@@ -56,19 +56,17 @@ public class WorldGeneration : MonoBehaviour
         Context context = new Context();
         context.SetStrategy(new GetHeight());
         int step = 1;
-        int previousPos = 0;
-        int charCount = 0;
+        int previousPos = 0;        
         int random;
-        int enemyCounter = width / 10;
+        int charCount = 0;
 
 
         List<Vector3> fullPath = new List<Vector3>();
 
         for (int i = 0; i < steps; i++)
         {
-            
-            List<PathNote> pathNotes;
-            
+           
+            List<PathNote> pathNotes;            
             random = context.Random(height);
             
             while (random == previousPos)
@@ -97,10 +95,10 @@ public class WorldGeneration : MonoBehaviour
 
             }
 
-           
-            
-            
 
+
+
+            
 
             if (pathNotes != null)
             {
@@ -121,10 +119,13 @@ public class WorldGeneration : MonoBehaviour
                     
                     previousPos = pathNotes[j].y;
 
+                    if(j != 0)
+                    {
+                        fullPath.Add(new Vector3(pathNotes[j].x, pathNotes[j].y));
+                    }
+                   
 
-                    fullPath.Add(new Vector3(pathNotes[j].x, pathNotes[j].y));
-
-                    //Debug.Log(fullPath.Count);
+                    
                     
                     
 
@@ -132,21 +133,25 @@ public class WorldGeneration : MonoBehaviour
             }           
             
         }
-        if(fullPath != null)
+
+        int enemyCounter = width / 10;
+
+        if (fullPath != null)
         {
-            //придумать что-то получше
+
             
-            int stepEnemy = fullPath.Count / enemyCounter;
-            int prevStep = stepEnemy - stepEnemy + 6;
+            int stepEnemy = (fullPath.Count - 2) / 3;
+            int secondStep = stepEnemy;
+            
             for (int f = 0; f < fullPath.Count; f++)
             {
                 if(enemyCounter != 0)
                 {
-                    
-                    Instantiate(enemyCube, fullPath[Random.Range(prevStep, fullPath.Count-2)], transform.rotation);
+                    Debug.Log(stepEnemy);
+
+                    Instantiate(enemyCube, fullPath[stepEnemy], transform.rotation);
                     enemyCounter--;
-                    prevStep += stepEnemy - 5;
-                    stepEnemy += stepEnemy - 5;
+                    stepEnemy += secondStep;
                     
                 }
                 if(fullPath.Count == f + 1)
@@ -157,5 +162,7 @@ public class WorldGeneration : MonoBehaviour
         }
         
     }
+
+    
     
 }
