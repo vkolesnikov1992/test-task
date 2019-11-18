@@ -233,7 +233,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11157785}
         m_MethodName: LoadLevel
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -577,7 +577,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 310298261}
         m_MethodName: RestartLvl
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -708,7 +708,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 335429839}
         m_MethodName: LoadLevel
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1052,7 +1052,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 588046066}
         m_MethodName: Resume
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1544,18 +1544,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51580f008a6f6384fb8e19f03da0a67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCube: {fileID: 5579919967784141792, guid: b8542385a1f96894bab16a713bcd0e15,
+  _defaultCube: {fileID: 5579919967784141792, guid: b8542385a1f96894bab16a713bcd0e15,
     type: 3}
-  lavaCube: {fileID: 5940956535821500277, guid: 91143034ca975904a991bfa95228e05b,
+  _lavaCube: {fileID: 5940956535821500277, guid: 91143034ca975904a991bfa95228e05b,
     type: 3}
-  charapter: {fileID: 1419363660709109958, guid: b70e4c6f1990b2b4fb28c46d9cc176d6,
+  _charapter: {fileID: 1419363660709109958, guid: b70e4c6f1990b2b4fb28c46d9cc176d6,
     type: 3}
-  enemyCube: {fileID: 5327857447829960320, guid: 28b3f7b45d5981e4c91ff1f17356c20e,
+  _enemyCube: {fileID: 5327857447829960320, guid: 28b3f7b45d5981e4c91ff1f17356c20e,
     type: 3}
-  finishCube: {fileID: 3788033761169350759, guid: 6074fc23d207f444d9324ef7ee6bc035,
+  _finishCube: {fileID: 3788033761169350759, guid: 6074fc23d207f444d9324ef7ee6bc035,
     type: 3}
-  width: 32
-  height: 8
+  _width: 32
+  _height: 8
 --- !u!1 &1231013875
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,8 +8,7 @@ public class Finish : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            GameController.finish = true;
-            
+            GameController.finish = true;            
         }
     }
 }

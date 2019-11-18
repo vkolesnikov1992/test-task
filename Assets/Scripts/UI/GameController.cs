@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    #region Public Fields
     public static bool isPaused;
     public static bool restart;
-    public static bool finish;
-    
+    public static bool finish;    
 
     public GameObject pauseMenuCanvas;
     public GameObject finishMenuCanvas;
-    
+    #endregion
 
-     
-
+    #region Update
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {            
-            isPaused = true;          
-                        
+            isPaused = true;       
         }
 
 
@@ -49,6 +47,6 @@ public class GameController : MonoBehaviour
         }
                
     }
-   
-    
+    #endregion
+
 }

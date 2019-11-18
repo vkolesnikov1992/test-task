@@ -68,7 +68,6 @@
     <Compile Include="Assets\Scripts\PathFinding\PathFinding.cs" />
     <Compile Include="Assets\Scripts\PathFinding\PathNote.cs" />
     <Compile Include="Assets\Scripts\Strategy.cs" />
-    <Compile Include="Assets\Scripts\Testing.cs" />
     <Compile Include="Assets\Scripts\UI\Continue.cs" />
     <Compile Include="Assets\Scripts\UI\GameController.cs" />
     <Compile Include="Assets\Scripts\UI\Lives.cs" />

@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class LoadLvl : MonoBehaviour
 {
     
-   public void LoadLevel(bool loadLevel)
+   public void LoadLevel()
     {
         SceneManager.LoadScene(1);
-        GameController.isPaused = loadLevel;
+        GameController.isPaused = false;
         GameController.finish = false;
     }
 }

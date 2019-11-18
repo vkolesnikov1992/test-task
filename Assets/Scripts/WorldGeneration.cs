@@ -4,165 +4,166 @@ using UnityEngine;
 
 public class WorldGeneration : MonoBehaviour
 {
-
-    public GameObject defaultCube;
-    public GameObject lavaCube;
-    public GameObject charapter;
-    public GameObject enemyCube;
-    public GameObject finishCube;
+    #region Private Fields
     [SerializeField]
-    private int width;
+    private GameObject _defaultCube;
+    [SerializeField]
+    private GameObject _lavaCube;
+    [SerializeField]
+    private GameObject _charapter;
+    [SerializeField]
+    private GameObject _enemyCube;
+    [SerializeField]
+    private GameObject _finishCube;
+
+    [SerializeField]
+    private int _width;
     [SerializeField] 
-    private int height;
-    private int[,] cubesArray;
-    public GameObject[,] gameObjects;
-    private List<Vector3> fullPath = new List<Vector3>();
+    private int _height;   
 
+    private GameObject[,] _gameObjects;
+    private List<Vector3> _fullPath = new List<Vector3>();
+    private PathFinding _pathF;
+    #endregion
 
-
-    PathFinding pathF;
-
+    #region Start
     void Start()
     {
-        pathF = new PathFinding(width, height);
-        cubesArray = new int[width, height];
-        gameObjects = new GameObject[width, height];
+        _pathF = new PathFinding(_width, _height);        
+        _gameObjects = new GameObject[_width, _height];
 
 
-        for (int x = 0; x < cubesArray.GetLength(0); x++)
+        InstantiateBlocks();
+        LevelGeneration();
+        EnemyGeneration();
+       
+        
+    }
+    #endregion
+
+    #region Private Methods
+    void InstantiateBlocks()
+    {
+        for (int x = 0; x < _gameObjects.GetLength(0); x++)
         {
-            for (int y = 0; y < cubesArray.GetLength(1); y++)
+            for (int y = 0; y < _gameObjects.GetLength(1); y++)
             {
                 if (y == 0)
                 {
-                    gameObjects[x, y] = Instantiate(lavaCube, new Vector3(x + 0.5f, y + 0.5f, 0), transform.rotation);
+                    _gameObjects[x, y] = Instantiate(_lavaCube, new Vector3(x + 0.5f, y + 0.5f, 0), transform.rotation);
 
                 }
                 else
                 {
-                    gameObjects[x, y] = Instantiate(defaultCube, new Vector3(x + 0.5f, y + 0.5f, 0), transform.rotation);
+                    _gameObjects[x, y] = Instantiate(_defaultCube, new Vector3(x + 0.5f, y + 0.5f, 0), transform.rotation);
                 }
-
-
             }
         }
+    }
 
-        int steps;
-        steps = (width - 2) / 3;        
-        if((width - 2) % 3 != 0)
-        {
-            steps++;
-        }
-        Context context = new Context();
-        context.SetStrategy(new GetHeight());
+    void LevelGeneration()
+    {
+        int steps = (_width - 2) / 3;                
         int step = 1;
-        int previousPos = 0;        
+        int previousPos = 0;
         int random;
         int charCount = 0;
 
+        Context context = new Context();
+        context.SetStrategy(new GetHeight());
+         
 
-        List<Vector3> fullPath = new List<Vector3>();
+        if ((_width - 2) % 3 != 0)
+        {
+            steps++;
+        }
+
 
         for (int i = 0; i < steps; i++)
         {
-           
-            List<PathNote> pathNotes;            
-            random = context.Random(height);
-            
+
+            List<PathNote> pathNotes;
+            random = context.Random(_height);
+
             while (random == previousPos)
             {
-                random = context.Random(height);                
+                random = context.Random(_height);
             }
-            
-            
+
+
             if (i == 0)
             {
-                pathNotes = pathF.FindPath(step, Random.Range(2, height - 3), step + 3, random);
+                pathNotes = _pathF.FindPath(step, Random.Range(2, _height - 3), step + 3, random);
                 step += 2;
-                
             }
 
-            else if ((width - 2) % 3 != 0 && steps == i + 1)
-            {                                
-                    pathNotes = pathF.FindPath(step, previousPos, step + (width - 2) % 3, random);
-                
+            else if ((_width - 2) % 3 != 0 && steps == i + 1)
+            {
+                pathNotes = _pathF.FindPath(step, previousPos, step + (_width - 2) % 3, random);
             }
-            
+
             else
-            {                
-                    pathNotes = pathF.FindPath(step, previousPos, step += 3, random);                    
-                           
-
+            {
+                pathNotes = _pathF.FindPath(step, previousPos, step += 3, random);
             }
 
 
-
-
-            
 
             if (pathNotes != null)
             {
                 for (int j = 0; j < pathNotes.Count; j++)
                 {
-                    
-                        Destroy(gameObjects[pathNotes[j].x, pathNotes[j].y]);
-                        Destroy(gameObjects[pathNotes[j].x, pathNotes[j].y + 1]);
-                        Destroy(gameObjects[pathNotes[j].x, pathNotes[j].y + 2]);
-                    
-                    
+
+                    Destroy(_gameObjects[pathNotes[j].x, pathNotes[j].y]);
+                    Destroy(_gameObjects[pathNotes[j].x, pathNotes[j].y + 1]);
+                    Destroy(_gameObjects[pathNotes[j].x, pathNotes[j].y + 2]);
+
+
                     if (charCount == 0)
                     {
-                        Instantiate(charapter, new Vector3(pathNotes[j].x, pathNotes[j].y), transform.rotation);
+                        Instantiate(_charapter, new Vector3(pathNotes[j].x, pathNotes[j].y), transform.rotation);
                         charCount++;
-                    }                   
-                    
-                    
+                    }
+
+
                     previousPos = pathNotes[j].y;
 
-                    if(j != 0)
+                    if (j != 0)
                     {
-                        fullPath.Add(new Vector3(pathNotes[j].x, pathNotes[j].y));
+                        _fullPath.Add(new Vector3(pathNotes[j].x, pathNotes[j].y));
                     }
-                   
-
-                    
-                    
-                    
-
                 }
-            }           
-            
+            }
+
         }
+    }
 
-        int enemyCounter = width / 10;
+    void EnemyGeneration()
+    {
+        int enemyCounter = _width / 10;
 
-        if (fullPath != null)
+        if (_fullPath != null)
         {
 
-            
-            int stepEnemy = (fullPath.Count - 2) / 3;
+            int stepEnemy = (_fullPath.Count - 2) / 3;
             int secondStep = stepEnemy;
-            
-            for (int f = 0; f < fullPath.Count; f++)
-            {
-                if(enemyCounter != 0)
-                {
-                    Debug.Log(stepEnemy);
 
-                    Instantiate(enemyCube, fullPath[stepEnemy], transform.rotation);
+            for (int i = 0; i < _fullPath.Count; i++)
+            {
+                if (enemyCounter != 0)
+                {                 
+                    Instantiate(_enemyCube, _fullPath[stepEnemy], transform.rotation);
                     enemyCounter--;
                     stepEnemy += secondStep;
-                    
+
                 }
-                if(fullPath.Count == f + 1)
+
+                if (_fullPath.Count == i + 1)
                 {
-                    Instantiate(finishCube, new Vector3(fullPath[f].x + 0.5f, fullPath[f].y + 0.5f), transform.rotation);
+                    Instantiate(_finishCube, new Vector3(_fullPath[i].x + 0.5f, _fullPath[i].y + 0.5f), transform.rotation);
                 }
             }
         }
-        
     }
-
-    
-    
+    #endregion
 }

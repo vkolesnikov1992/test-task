@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Restart : MonoBehaviour
 {
-    public void RestartLvl(bool restart)
+    public void RestartLvl()
     {
-
         GameController.restart = true;
         GameController.finish = false;
     }

@@ -5,10 +5,9 @@ using UnityEngine;
 public class Continue : MonoBehaviour
 {
 
-    public void Resume(bool resume)
+    public void Resume()
     {
-        GameController.isPaused = false;
-        
+        GameController.isPaused = false;        
     }
 
 

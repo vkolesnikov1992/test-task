@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class Charapter : MonoBehaviour
 {
-    [SerializeField]
-    public static int lives;
+
+    #region Private Fields
     [SerializeField]
     private int weight;
     private float size;
     private Rigidbody2D rigidbody;
     private Transform transform;
-
-    public float forse;
-    public float jumpForse;
     private bool isGrounded;
+    private Vector3 startPos;
+    private int startCountLives;
+    #endregion
+
+    #region Public Fields
+    public float forse;
+    public float jumpForse;    
     public Transform feetPosition;
     public float checkRadius;
     public LayerMask whatIsGround;
+    public static int lives;
+    #endregion
 
-    private Vector3 startPos;
-    private int startCountLives;
-
-    
-
-
-
-    // Start is called before the first frame update
+    #region Start and FixedUpdate
     void Start()
     {
         Context context = new Context();
@@ -42,34 +41,21 @@ public class Charapter : MonoBehaviour
         size = context.FloatRandom(weight);
         transform.localScale = new Vector3(size, size);
 
-        startPos = transform.position;
-
-        
-
-
-
-
+        startPos = transform.position;      
     }
 
-    // Update is called once per frame
+    
     void FixedUpdate()
-    {
-        
-
+    {       
         float moveHorizontal = Input.GetAxis("Horizontal");
-
-        rigidbody.AddForce(new Vector2(moveHorizontal * forse, rigidbody.velocity.y));
-        
-        
-
+        rigidbody.AddForce(new Vector2(moveHorizontal * forse, rigidbody.velocity.y));       
         isGrounded = Physics2D.OverlapCircle(feetPosition.position, checkRadius, whatIsGround);
 
         if(isGrounded && Input.GetButtonDown("Jump"))
         {
             rigidbody.AddForce(Vector2.up * jumpForse);            
         }      
-        
-       
+             
         
 
         if (GameController.restart)
@@ -80,6 +66,9 @@ public class Charapter : MonoBehaviour
         }
         
     }
+    #endregion
+
+    #region Private Methods
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "enemyCube")
@@ -87,11 +76,9 @@ public class Charapter : MonoBehaviour
             if(lives != 0)
             {
                 lives--;
-            }
-             
+            }           
             
-
-            if (lives == 0)
+            else if (lives == 0)
             {
                 GameController.finish = true;
                 GameController.restart = true;
@@ -102,14 +89,8 @@ public class Charapter : MonoBehaviour
         if (collision.collider.tag == "lavaCube")
         {
            GameController.finish = true;
-           GameController.restart = true;
-            
-        }
-
-            
+           GameController.restart = true;            
+        }                    
     }
-    
-
-    
-
+    #endregion
 }

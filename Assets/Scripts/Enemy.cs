@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-   
-   
+
+    #region Private Fields
     private int weight;
     private float size;
     private Rigidbody2D rigidbody;
@@ -15,8 +15,9 @@ public class Enemy : MonoBehaviour
     public int speed = 1;
     private bool isRightMove = true;
     private Vector3 startPos;
+    #endregion
 
-   
+    #region Start and FixedUpdate
     void Start()
     {
         Context context = new Context();
@@ -51,7 +52,9 @@ public class Enemy : MonoBehaviour
 
         
     }
+    #endregion
 
+    #region Private Methods
     void Movement()
     {
            
@@ -95,6 +98,7 @@ public class Enemy : MonoBehaviour
         }
 
     }
+    
 
     private void OnCollisionStay2D(Collision2D collision)
     {        
@@ -108,4 +112,5 @@ public class Enemy : MonoBehaviour
         isMove = false;
        
     }
+    #endregion
 }
