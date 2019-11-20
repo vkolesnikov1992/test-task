@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Charapter : MonoBehaviour
+public class Charapter : Cube
 {
 
-    #region Private Fields
-    [SerializeField]
-    private int _weight;
-    private float _size;
-    private Rigidbody2D _rigidbody;
-    private Transform _transform;
-    private bool isGrounded;
-    private Vector3 _startPos;
+    #region Private Fields    
+    private bool isGrounded;    
     private int _startCountLives;
     #endregion
 
@@ -23,23 +17,14 @@ public class Charapter : MonoBehaviour
     #endregion
 
     #region Start and FixedUpdate
+    
     void Start()
-    {
-        Context context = new Context();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _transform = GetComponent<Transform>();
+    {        
+        Context context = new Context();        
 
-        context.SetStrategy(new GetLives());
-        _weight = Random.Range(1, 6);
-        _rigidbody.mass = _weight;
-        lives = context.Random(_weight);
-
-        context.SetStrategy(new GetSize());
-        _size = context.FloatRandom(_weight);
-        transform.localScale = new Vector3(_size, _size);
-
-        _startPos = transform.position;
-        _startCountLives = lives;
+        context.SetStrategy(new GetLives());        
+        lives = context.Random(weight);        
+        _startCountLives = lives;        
     }
 
     
@@ -48,12 +33,12 @@ public class Charapter : MonoBehaviour
         
         RaycastHit2D isGround = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - transform.localScale.y / 2 - 0.01f), Vector2.down, 0.01f);
         float moveHorizontal = Input.GetAxis("Horizontal");
-        _rigidbody.AddForce(new Vector2(moveHorizontal * Forse, _rigidbody.velocity.y));        
+        rigidbody.AddForce(new Vector2(moveHorizontal * Forse, rigidbody.velocity.y));        
         if(isGround.collider != null)
         {
             if (isGround.collider.tag == "defaultCube" && Input.GetButtonDown("Jump"))
             {
-                _rigidbody.AddForce(Vector2.up * JumpForse);
+                rigidbody.AddForce(Vector2.up * JumpForse);
             }
         }
            
@@ -62,9 +47,9 @@ public class Charapter : MonoBehaviour
 
         if (GameController.restart)
         {           
-            transform.position = _startPos;
+            transform.position = startPos;
             lives = _startCountLives;
-            _rigidbody.velocity = Vector3.zero;
+            rigidbody.velocity = Vector3.zero;
         }
         
     }

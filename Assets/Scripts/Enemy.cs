@@ -2,44 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Cube
 {
 
-    #region Private Fields
-    private int weight;
-    private float size;
-    private Rigidbody2D rigidbody;
-    private Transform transform;
-    private Ray2D ray;
+    #region Private Fields    
     private bool isMove;
     public int speed = 1;
-    private bool isRightMove = true;
-    private Vector3 startPos;
+    private bool isRightMove = true;   
     #endregion
 
-    #region Start and FixedUpdate
-    void Start()
-    {
-        Context context = new Context();
-        rigidbody = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform>();
-
-        
-        weight = Random.Range(1, 6);
-        rigidbody.mass = weight;
-       
-
-        context.SetStrategy(new GetSize());
-        size = context.FloatRandom(weight);
-        transform.localScale = new Vector3(size, size);
-
-        startPos = transform.position;
-
-
-
-    }
-
-    
+    #region FixedUpdate  
     private void FixedUpdate()
     {
 
