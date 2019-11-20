@@ -7,13 +7,13 @@ public class Charapter : MonoBehaviour
 
     #region Private Fields
     [SerializeField]
-    private int weight;
-    private float size;
-    private Rigidbody2D rigidbody;
-    private Transform transform;
+    private int _weight;
+    private float _size;
+    private Rigidbody2D _rigidbody;
+    private Transform _transform;
     private bool isGrounded;
-    private Vector3 startPos;
-    private int startCountLives;
+    private Vector3 _startPos;
+    private int _startCountLives;
     #endregion
 
     #region Public Fields
@@ -29,40 +29,40 @@ public class Charapter : MonoBehaviour
     void Start()
     {
         Context context = new Context();
-        rigidbody = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _transform = GetComponent<Transform>();
 
         context.SetStrategy(new GetLives());
-        weight = Random.Range(1, 6);
-        rigidbody.mass = weight;
-        lives = context.Random(weight);
+        _weight = Random.Range(1, 6);
+        _rigidbody.mass = _weight;
+        lives = context.Random(_weight);
 
         context.SetStrategy(new GetSize());
-        size = context.FloatRandom(weight);
-        transform.localScale = new Vector3(size, size);
+        _size = context.FloatRandom(_weight);
+        transform.localScale = new Vector3(_size, _size);
 
-        startPos = transform.position;      
+        _startPos = transform.position;      
     }
 
     
     void FixedUpdate()
     {       
         float moveHorizontal = Input.GetAxis("Horizontal");
-        rigidbody.AddForce(new Vector2(moveHorizontal * Forse, rigidbody.velocity.y));       
+        _rigidbody.AddForce(new Vector2(moveHorizontal * Forse, _rigidbody.velocity.y));       
         isGrounded = Physics2D.OverlapCircle(FeetPosition.position, CheckRadius, WhatIsGround);
 
         if(isGrounded && Input.GetButtonDown("Jump"))
         {
-            rigidbody.AddForce(Vector2.up * JumpForse);            
+            _rigidbody.AddForce(Vector2.up * JumpForse);            
         }      
              
         
 
         if (GameController.restart)
         {           
-            transform.position = startPos;
-            lives = startCountLives;
-            rigidbody.velocity = Vector3.zero;
+            transform.position = _startPos;
+            lives = _startCountLives;
+            _rigidbody.velocity = Vector3.zero;
         }
         
     }
