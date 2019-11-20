@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1051d60aaa5f07447bb19a3f22266041, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.081349134, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.08235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -117,14 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417585dbc754f3441858c4a8d736657d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weight: 0
   Forse: 30
   JumpForse: 1000
-  FeetPosition: {fileID: 5858103417406379813}
-  CheckRadius: 0.1
-  WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!61 &7793809181398351252
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,7 +132,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0027127266, y: 0.027387142}
+  m_Offset: {x: 0.0027127266, y: 0.008690357}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -149,7 +143,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9457483, y: 0.91810036}
+  m_Size: {x: 0.96070576, y: 0.9554939}
   m_EdgeRadius: 0
 --- !u!1 &5542338241344889947
 GameObject:
@@ -161,6 +155,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4247096782984329985}
   - component: {fileID: 72616083439548440}
+  - component: {fileID: 8011379123018072057}
+  - component: {fileID: 7558639262639115921}
   m_Layer: 0
   m_Name: CircleColl
   m_TagString: Untagged
@@ -198,6 +194,38 @@ CircleCollider2D:
   m_Offset: {x: -0.006780505, y: -0.31197}
   serializedVersion: 2
   m_Radius: 0.18392396
+--- !u!58 &8011379123018072057
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542338241344889947}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.28792858, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.21207142
+--- !u!58 &7558639262639115921
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542338241344889947}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.29353762, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.20646238
 --- !u!1 &9204916016246107557
 GameObject:
   m_ObjectHideFlags: 0

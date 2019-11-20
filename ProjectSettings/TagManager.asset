@@ -8,6 +8,7 @@ TagManager:
   - enemyCube
   - FinishCube
   - lavaCube
+  - Immortal
   layers:
   - Default
   - TransparentFX

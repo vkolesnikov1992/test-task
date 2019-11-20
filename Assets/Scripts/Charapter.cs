@@ -58,9 +58,12 @@ public class Charapter : Cube
     #region Private Methods
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "enemyCube")
+        if (collision.collider.tag == "enemyCube" && transform.tag == "Player")
         {
-            lives--;            
+            lives--;
+            transform.tag = "Immortal";
+            Debug.Log(lives + "  " + transform.tag);
+            Invoke("ImmortalyIsOver", 1);
             
             if (lives == 0)
             {
@@ -75,6 +78,11 @@ public class Charapter : Cube
            GameController.finish = true;
            GameController.restart = true;            
         }                    
+    }
+
+    private void ImmortalyIsOver()
+    {
+        transform.tag = "Player";
     }
     #endregion
 }
