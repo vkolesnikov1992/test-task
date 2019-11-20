@@ -6,27 +6,22 @@ using UnityEngine.UI;
 public class Lives : MonoBehaviour
 {
    
+
     void Update()
-    {       
-        if(Charapter.lives == 1)
+    {    
+        for(int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(0).GetComponent<Image>().enabled = true;
-            transform.GetChild(1).GetComponent<Image>().enabled = false;
-            transform.GetChild(2).GetComponent<Image>().enabled = false;
+            if(i < Charapter.lives)
+            {
+                transform.GetChild(i).GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                transform.GetChild(i).GetComponent<Image>().enabled = false;
+            }
         }
-
-        if (Charapter.lives == 2)
-        {
-            transform.GetChild(0).GetComponent<Image>().enabled = true;
-            transform.GetChild(1).GetComponent<Image>().enabled = true;
-            transform.GetChild(2).GetComponent<Image>().enabled = false;
-        }
-
-        if (Charapter.lives == 3)
-        {
-            transform.GetChild(0).GetComponent<Image>().enabled = true;
-            transform.GetChild(1).GetComponent<Image>().enabled = true;
-            transform.GetChild(2).GetComponent<Image>().enabled = true;
-        }        
+       
+        
+        
     }
 }

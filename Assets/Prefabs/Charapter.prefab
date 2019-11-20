@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 663638269409041037}
   - component: {fileID: 8875932871945331615}
   - component: {fileID: 3346564309765834645}
-  - component: {fileID: 2538820402427933884}
   - component: {fileID: 7793809181398351252}
   m_Layer: 0
   m_Name: Charapter
@@ -33,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5858103417406379813}
+  - {fileID: 4247096782984329985}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417585dbc754f3441858c4a8d736657d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 0
+  _weight: 0
   Forse: 30
   JumpForse: 1000
   FeetPosition: {fileID: 5858103417406379813}
@@ -125,22 +125,6 @@ MonoBehaviour:
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 256
---- !u!58 &2538820402427933884
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419363660709109958}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!61 &7793809181398351252
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,6 +151,53 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9457483, y: 0.91810036}
   m_EdgeRadius: 0
+--- !u!1 &5542338241344889947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4247096782984329985}
+  - component: {fileID: 72616083439548440}
+  m_Layer: 0
+  m_Name: CircleColl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4247096782984329985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542338241344889947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1774731601360322135}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &72616083439548440
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542338241344889947}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.006780505, y: -0.31197}
+  serializedVersion: 2
+  m_Radius: 0.18392396
 --- !u!1 &9204916016246107557
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5858103417406379813}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: FeetPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -18,10 +18,7 @@ public class Charapter : MonoBehaviour
 
     #region Public Fields
     public float Forse;
-    public float JumpForse;    
-    public Transform FeetPosition;
-    public float CheckRadius;
-    public LayerMask WhatIsGround;
+    public float JumpForse; 
     public static int lives;
     #endregion
 
@@ -41,20 +38,25 @@ public class Charapter : MonoBehaviour
         _size = context.FloatRandom(_weight);
         transform.localScale = new Vector3(_size, _size);
 
-        _startPos = transform.position;      
+        _startPos = transform.position;
+        _startCountLives = lives;
     }
 
     
     void FixedUpdate()
-    {       
+    {
+        
+        RaycastHit2D isGround = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - transform.localScale.y / 2 - 0.01f), Vector2.down, 0.01f);
         float moveHorizontal = Input.GetAxis("Horizontal");
-        _rigidbody.AddForce(new Vector2(moveHorizontal * Forse, _rigidbody.velocity.y));       
-        isGrounded = Physics2D.OverlapCircle(FeetPosition.position, CheckRadius, WhatIsGround);
-
-        if(isGrounded && Input.GetButtonDown("Jump"))
+        _rigidbody.AddForce(new Vector2(moveHorizontal * Forse, _rigidbody.velocity.y));        
+        if(isGround.collider != null)
         {
-            _rigidbody.AddForce(Vector2.up * JumpForse);            
-        }      
+            if (isGround.collider.tag == "defaultCube" && Input.GetButtonDown("Jump"))
+            {
+                _rigidbody.AddForce(Vector2.up * JumpForse);
+            }
+        }
+           
              
         
 
@@ -73,12 +75,9 @@ public class Charapter : MonoBehaviour
     {
         if (collision.collider.tag == "enemyCube")
         {
-            if(lives != 0)
-            {
-                lives--;
-            }           
+            lives--;            
             
-            else if (lives == 0)
+            if (lives == 0)
             {
                 GameController.finish = true;
                 GameController.restart = true;
