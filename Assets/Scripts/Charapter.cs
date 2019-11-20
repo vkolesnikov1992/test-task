@@ -17,11 +17,11 @@ public class Charapter : MonoBehaviour
     #endregion
 
     #region Public Fields
-    public float forse;
-    public float jumpForse;    
-    public Transform feetPosition;
-    public float checkRadius;
-    public LayerMask whatIsGround;
+    public float Forse;
+    public float JumpForse;    
+    public Transform FeetPosition;
+    public float CheckRadius;
+    public LayerMask WhatIsGround;
     public static int lives;
     #endregion
 
@@ -48,12 +48,12 @@ public class Charapter : MonoBehaviour
     void FixedUpdate()
     {       
         float moveHorizontal = Input.GetAxis("Horizontal");
-        rigidbody.AddForce(new Vector2(moveHorizontal * forse, rigidbody.velocity.y));       
-        isGrounded = Physics2D.OverlapCircle(feetPosition.position, checkRadius, whatIsGround);
+        rigidbody.AddForce(new Vector2(moveHorizontal * Forse, rigidbody.velocity.y));       
+        isGrounded = Physics2D.OverlapCircle(FeetPosition.position, CheckRadius, WhatIsGround);
 
         if(isGrounded && Input.GetButtonDown("Jump"))
         {
-            rigidbody.AddForce(Vector2.up * jumpForse);            
+            rigidbody.AddForce(Vector2.up * JumpForse);            
         }      
              
         

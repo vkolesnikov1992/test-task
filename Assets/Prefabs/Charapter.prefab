@@ -118,11 +118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 0
-  forse: 30
-  jumpForse: 1000
-  feetPosition: {fileID: 5858103417406379813}
-  checkRadius: 0.1
-  whatIsGround:
+  Forse: 30
+  JumpForse: 1000
+  FeetPosition: {fileID: 5858103417406379813}
+  CheckRadius: 0.1
+  WhatIsGround:
     serializedVersion: 2
     m_Bits: 256
 --- !u!58 &2538820402427933884
