@@ -4,36 +4,39 @@ using UnityEngine;
 
 public class PathFinding 
 {
+    #region Private Fields
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 14; 
 
-    private GridSystem<PathNote> grid;
-    private List<PathNote> openList;
-    private List<PathNote> closedList;
+    private GridSystem<PathNote> _grid;
+    private List<PathNote> _openList;
+    private List<PathNote> _closedList;
+    #endregion
 
+    #region Public Methods
     public PathFinding(int width, int height)
     {
-        grid = new GridSystem<PathNote>(width, height, 1f, Vector3.zero, (GridSystem<PathNote> g, int x, int y) => new PathNote(g, x, y)); 
+        _grid = new GridSystem<PathNote>(width, height, 1f, Vector3.zero, (GridSystem<PathNote> g, int x, int y) => new PathNote(g, x, y)); 
     }
 
     public GridSystem<PathNote> GetGrid()
     {
-        return grid;
+        return _grid;
     }
 
     public List<PathNote> FindPath(int startX, int startY, int endX, int endY)
     {
-        PathNote startNote = grid.GetGridObject(startX, startY);
-        PathNote endNote = grid.GetGridObject(endX, endY);
+        PathNote startNote = _grid.GetGridObject(startX, startY);
+        PathNote endNote = _grid.GetGridObject(endX, endY);
 
-        openList = new List<PathNote> { startNote };
-        closedList = new List<PathNote>();
+        _openList = new List<PathNote> { startNote };
+        _closedList = new List<PathNote>();
 
-        for(int x = 0; x < grid.GetWidth(); x++)
+        for(int x = 0; x < _grid.GetWidth(); x++)
         {
-            for(int y = 0; y < grid.GetHeight(); y++)
+            for(int y = 0; y < _grid.GetHeight(); y++)
             {
-                PathNote pathNote = grid.GetGridObject(x, y);
+                PathNote pathNote = _grid.GetGridObject(x, y);
                 pathNote.gCost = int.MaxValue;
                 pathNote.CalculateFCost();
                 pathNote.cameFromNote = null;
@@ -44,19 +47,19 @@ public class PathFinding
         startNote.hCost = CalculateDistanceCost(startNote, endNote);
         startNote.CalculateFCost();
 
-        while(openList.Count > 0)
+        while(_openList.Count > 0)
         {
-            PathNote currentNote = GetLowestFCostNote(openList);
+            PathNote currentNote = GetLowestFCostNote(_openList);
             if(currentNote == endNote)
             {
                 return CalculatePath(endNote);
             }
-            openList.Remove(currentNote);
-            closedList.Add(currentNote);
+            _openList.Remove(currentNote);
+            _closedList.Add(currentNote);
 
             foreach(PathNote neighbourNote in GetNeighbourList(currentNote))
             {
-                if (closedList.Contains(neighbourNote)) continue;
+                if (_closedList.Contains(neighbourNote)) continue;
 
                 int tentativeGCost = currentNote.gCost + CalculateDistanceCost(currentNote, neighbourNote);
                 if(tentativeGCost < neighbourNote.gCost)
@@ -66,9 +69,9 @@ public class PathFinding
                     neighbourNote.hCost = CalculateDistanceCost(neighbourNote, endNote);
                     neighbourNote.CalculateFCost();
 
-                    if (!openList.Contains(neighbourNote))
+                    if (!_openList.Contains(neighbourNote))
                     {
-                        openList.Add(neighbourNote);
+                        _openList.Add(neighbourNote);
                     }
                 }
             }
@@ -76,7 +79,12 @@ public class PathFinding
 
         return null;
     }
-    
+
+    public PathNote GetNode(int x, int y)
+    {
+        return _grid.GetGridObject(x, y);
+    }
+
     private List<PathNote> GetNeighbourList(PathNote currentNote)
     {
         List<PathNote> neighbourList = new List<PathNote>();
@@ -88,30 +96,27 @@ public class PathFinding
             // Left Down
             if (currentNote.y - 1 >= 0) neighbourList.Add(GetNode(currentNote.x - 1, currentNote.y - 1));
             // Left Up
-            if (currentNote.y + 1 < grid.GetHeight()) neighbourList.Add(GetNode(currentNote.x - 1, currentNote.y + 1));
+            if (currentNote.y + 1 < _grid.GetHeight()) neighbourList.Add(GetNode(currentNote.x - 1, currentNote.y + 1));
         }
-        if (currentNote.x + 1 < grid.GetWidth())
+        if (currentNote.x + 1 < _grid.GetWidth())
         {
             // Right
             neighbourList.Add(GetNode(currentNote.x + 1, currentNote.y));
             // Right Down
             if (currentNote.y - 1 >= 0) neighbourList.Add(GetNode(currentNote.x + 1, currentNote.y - 1));
             // Right Up
-            if (currentNote.y + 1 < grid.GetHeight()) neighbourList.Add(GetNode(currentNote.x + 1, currentNote.y + 1));
+            if (currentNote.y + 1 < _grid.GetHeight()) neighbourList.Add(GetNode(currentNote.x + 1, currentNote.y + 1));
         }
         // Down
         if (currentNote.y - 1 >= 0) neighbourList.Add(GetNode(currentNote.x, currentNote.y - 1));
         // Up
-        if (currentNote.y + 1 < grid.GetHeight()) neighbourList.Add(GetNode(currentNote.x, currentNote.y + 1));
+        if (currentNote.y + 1 < _grid.GetHeight()) neighbourList.Add(GetNode(currentNote.x, currentNote.y + 1));
 
         return neighbourList;
     }
+    #endregion
 
-    public PathNote GetNode(int x, int y)
-    {
-        return grid.GetGridObject(x, y);
-    }
-
+    #region Private Methods
     private List<PathNote> CalculatePath(PathNote endNote)
     {
         List<PathNote> path = new List<PathNote>();
@@ -146,4 +151,5 @@ public class PathFinding
         }
         return lowestFCostNote;
     }
+    #endregion
 }
