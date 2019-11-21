@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Charapter : Cube
+public class Сharacter : Cube
 {
 
     #region Private Fields    

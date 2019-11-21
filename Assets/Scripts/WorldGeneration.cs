@@ -10,7 +10,7 @@ public class WorldGeneration : MonoBehaviour
     [SerializeField]
     private GameObject _lavaCube;
     [SerializeField]
-    private GameObject _charapter;
+    private GameObject _сharacter;
     [SerializeField]
     private GameObject _enemyCube;
     [SerializeField]
@@ -121,7 +121,7 @@ public class WorldGeneration : MonoBehaviour
 
                     if (charCount == 0)
                     {
-                        Instantiate(_charapter, new Vector3(pathNotes[j].x, pathNotes[j].y), transform.rotation);
+                        Instantiate(_сharacter, new Vector3(pathNotes[j].x, pathNotes[j].y), transform.rotation);
                         charCount++;
                     }
 

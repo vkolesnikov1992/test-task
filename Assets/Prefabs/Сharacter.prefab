@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3346564309765834645}
   - component: {fileID: 7793809181398351252}
   m_Layer: 0
-  m_Name: Charapter
+  m_Name: "\u0421haracter"
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

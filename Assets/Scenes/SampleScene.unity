@@ -1535,7 +1535,7 @@ MonoBehaviour:
     type: 3}
   _lavaCube: {fileID: 5940956535821500277, guid: 91143034ca975904a991bfa95228e05b,
     type: 3}
-  _charapter: {fileID: 1419363660709109958, guid: b70e4c6f1990b2b4fb28c46d9cc176d6,
+  "_\u0441haracter": {fileID: 1419363660709109958, guid: b70e4c6f1990b2b4fb28c46d9cc176d6,
     type: 3}
   _enemyCube: {fileID: 5327857447829960320, guid: 28b3f7b45d5981e4c91ff1f17356c20e,
     type: 3}

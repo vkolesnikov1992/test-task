@@ -11,7 +11,7 @@ public class Lives : MonoBehaviour
     {    
         for(int i = 0; i < transform.childCount; i++)
         {
-            if(i < Charapter.lives)
+            if(i < Сharacter.lives)
             {
                 transform.GetChild(i).GetComponent<Image>().enabled = true;
             }
